@@ -1,0 +1,22 @@
+{
+  "name": "j01-portfolio-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moradi1412/J01-Portfolio-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moradi1412/J01-Portfolio-generator/issues"
+  },
+  "homepage": "https://github.com/moradi1412/J01-Portfolio-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.2"
+  }
+}

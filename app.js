@@ -1,6 +1,7 @@
 const fs = require('fs');
 const generatePage = require("./src/page-template.js");
 
+//capture the command line arguements 
 const profileDataArgs = process.argv.slice(2);
 
 const [name, github] = profileDataArgs;
