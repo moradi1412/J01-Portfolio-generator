@@ -22,60 +22,67 @@ const promptUser = () => {
 };
 
 const promptProject = portfolioData => {
-  
+
   console.log(`
   =================
   Add a New Project
   =================
-  `); 
+  `);
 
   // If there's no 'projects' array property, create one
-if (!portfolioData.projects) {
-  portfolioData.projects = [];
-}
+  if (!portfolioData.projects) {
+    portfolioData.projects = [];
+  }
   return inquirer.prompt([
     {
-      type: 'input', 
+      type: 'input',
       name: 'name',
-      message:'what is the name of your project? '
-    }, 
+      message: 'what is the name of your project? ',
+      validate: nameInput => {
+        if (nameInput) {
+          return ture; 
+        } else {console.log ("please enter your name!"); 
+      return false;
+             }
+      }
+        },
     {
-      type: 'input', 
+      type: 'input',
       name: 'description',
-      message:'provide a description of the project (Required) ? '
-    }, 
+      message: 'provide a description of the project (Required) ? '
+    },
     {
-      type: 'checkbox', 
+      type: 'checkbox',
       name: 'languages',
       message: 'Waht did you build this project with? (check all that apply)',
-      choices:['JavaScript', 'HTML', 'CSS', 'ES6', 'JQuery', 'Bottstrap', 'node']
-    }, 
+      choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'JQuery', 'Bottstrap', 'node']
+    },
     {
-      type: 'input', 
+      type: 'input',
       name: 'link',
-      message:'Enter the gitHub link to your projects. (Required) '
-    }, 
+      message: 'Enter the gitHub link to your projects. (Required) '
+    },
     {
-      type: 'confirm', 
+      type: 'confirm',
       name: 'feature',
-      message:'would you like to feature this project? ',
+      message: 'would you like to feature this project? ',
       default: false
-    }, 
+    },
     {
-      type: 'confirm', 
+      type: 'confirm',
       name: 'confrimAddProject',
-      message:'Would you like to enter another project? ',
+      message: 'Would you like to enter another project? ',
       default: false
-    }, 
+    }
   ])
-  .then(projectData => {
-    portfolioData.projects.push(projectData);
-    if (projectData.confirmAddProject) {
-      return promptProject(portfolioData);
-    } else {
-      return portfolioData;
-};
-  })
+    .then(projectData => {
+      portfolioData.projects.push(projectData);
+      if (projectData.confirmAddProject) {
+        return promptProject(portfolioData);
+      } else {
+        return portfolioData;
+      }
+    });
 };
 
 
