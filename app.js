@@ -3,7 +3,7 @@ const generatePage = require("./src/page-template.js");
 //inquirer to get the data from terminal 
 const inquirer = require('inquirer');
 //file system application 
-const fs = require('fs');
+const {writeFile, copyFile} = require('./utils/generate-site');
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -129,47 +129,22 @@ Add a New Project
     });
 };
 
+
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    const pageHTML = generatePage (portfolioData); 
-
-    fs.writeFile('./index.html', generatePage(portfolioData), err => {
-    if (err) throw new Error(err);
-    console.log('Portfolio complete! Check out index.html to see the output!');
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
   });
-  });
-// console.log (inquirer);
-
-
-
-
-// //capture the command line arguements 
-// const profileDataArgs = process.argv.slice(2);
-
-// const [name, github] = profileDataArgs;
-
-
-
-// 
-
-//  
-// });
-// const profileDataArgs = process.argv.slice(2, process.argv.length);
-
-
-// const printProfileData = profileDataArr => {
-//     // This...
-//     for (let i = 0; i < profileDataArr.length; i += 1) {
-//       console.log(profileDataArr[i]);
-//     }
-
-//     console.log('================');
-
-//     // Is the same as this...
-//     profileDataArr.forEach((profileItem) => {
-//       console.log(profileItem)
-//     });
-//   };
-
-//   printProfileData(profileDataArgs);
